@@ -1,6 +1,6 @@
-package com.dogoma.mixin.client;
+package yuku.dsupport.mixin.client;
 
-import com.dogoma.partyUI.PartyTracker;
+import yuku.dsupport.partyUI.PartyTracker;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.GameMessageS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
