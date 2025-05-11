@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ItemRarityChecker {
 
-    private static final ItemRarity MINIMUM_HIGHLIGHT_RARITY = ItemRarity.RARE;
+    private static final ItemRarity MINIMUM_HIGHLIGHT_RARITY = ItemRarity.SUPERRARE;
 
 
     public static boolean shouldHighlight(ItemStack stack) {
@@ -19,7 +19,7 @@ public class ItemRarityChecker {
 
         List<Text> lore = stack.getTooltip(client.player, TooltipContext.ADVANCED);
         ItemRarity rarity = ItemRarity.fromLore(lore);
-        return true;//rarity.level >= MINIMUM_HIGHLIGHT_RARITY.level;
+        return rarity.level >= MINIMUM_HIGHLIGHT_RARITY.level;
     }
 
 }
