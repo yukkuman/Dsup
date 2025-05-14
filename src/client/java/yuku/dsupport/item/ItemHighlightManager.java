@@ -43,10 +43,7 @@ public class ItemHighlightManager {
                 switch (key) {
                     case "GrowSec" -> growSec = Integer.parseInt(String.valueOf(entry.getValue()));
                     case "enableHighLight" -> enableHighlight = Boolean.parseBoolean(String.valueOf(entry.getValue()));
-                    case "minimumRarity" -> {
-                        System.out.println(entry.getValue());
-                        ItemRarityChecker.MINIMUM_HIGHLIGHT_RARITY = ItemRarity.fromString(String.valueOf(entry.getValue()));
-                    }
+                    case "minimumRarity" -> ItemRarityChecker.MINIMUM_HIGHLIGHT_RARITY = ItemRarity.fromString(String.valueOf(entry.getValue()));
                 }
             }
         } catch (Exception e) {
