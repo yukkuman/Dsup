@@ -13,6 +13,7 @@ public class DoragomaSupportModClient implements ClientModInitializer {
 		LockKeyHandler.register();
 		ClientLockRegistry.load();
 		ItemHighlightManager.register();
+		ItemHighlightManager.load();
 
 
 		HudRenderCallback.EVENT.register(PartyHudRenderer::render);

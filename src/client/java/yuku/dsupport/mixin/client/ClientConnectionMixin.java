@@ -69,9 +69,6 @@ public class ClientConnectionMixin {
 
             int lockState_curried = ClientLockRegistry.getLockState(client.player.currentScreenHandler.getCursorStack());
 
-            client.player.sendMessage(Text.of(lockState_curried + ""), false);
-            client.player.sendMessage(Text.of(clickPacket.getSlot() + ""), false);
-
             // セミロック → ドロップ関連・数字キー移動をキャンセル
             if (lockState_curried == 1) {
                 if (clickPacket.getSlot() == -999) {

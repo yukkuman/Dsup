@@ -9,7 +9,7 @@ import java.util.List;
 
 public class ItemRarityChecker {
 
-    private static final ItemRarity MINIMUM_HIGHLIGHT_RARITY = ItemRarity.SUPERRARE;
+    public static ItemRarity MINIMUM_HIGHLIGHT_RARITY = ItemRarity.SUPERRARE;
 
 
     public static boolean shouldHighlight(ItemStack stack) {

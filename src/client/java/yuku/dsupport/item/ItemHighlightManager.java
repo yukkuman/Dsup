@@ -1,5 +1,10 @@
 package yuku.dsupport.item;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import net.fabricmc.loader.api.FabricLoader;
 import yuku.dsupport.mixin.client.EntityAccessor;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.minecraft.client.MinecraftClient;
@@ -12,6 +17,7 @@ import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.util.Formatting;
 
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,14 +26,52 @@ import static yuku.dsupport.item.ItemRarityChecker.shouldHighlight;
 
 public class ItemHighlightManager {
 
+    public static boolean enableHighlight = true;
     private static final Map<Integer, Integer> highlightTicks = new HashMap<>();
     public static int growSec = 10;
+
+    private static final File HighLight_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "itemhighlighter.json");
+    private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+
+    public static void load() {
+        if (!HighLight_FILE.exists()) return;
+        try (Reader reader = new FileReader(HighLight_FILE)) {
+            JsonObject json = GSON.fromJson(reader, JsonObject.class);
+
+            for (Map.Entry<String, JsonElement> entry : json.entrySet()) {
+                String key = entry.getKey();
+                switch (key) {
+                    case "GrowSec" -> growSec = Integer.parseInt(String.valueOf(entry.getValue()));
+                    case "enableHighLight" -> enableHighlight = Boolean.parseBoolean(String.valueOf(entry.getValue()));
+                    case "minimumRarity" -> {
+                        System.out.println(entry.getValue());
+                        ItemRarityChecker.MINIMUM_HIGHLIGHT_RARITY = ItemRarity.fromString(String.valueOf(entry.getValue()));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("[ItemHighLighter] 状態の読み込みに失敗: " + e.getMessage());
+        }
+    }
+
+    public static void save() {
+        try (Writer writer = new FileWriter(HighLight_FILE)) {
+            JsonObject json = new JsonObject();
+            json.addProperty("GrowSec", growSec);
+            json.addProperty("enableHighLight", enableHighlight);
+            json.addProperty("minimumRarity", ItemRarityChecker.MINIMUM_HIGHLIGHT_RARITY.keyword);
+            GSON.toJson(json, writer);
+        } catch (Exception e) {
+            System.err.println("[ItemHighLighter] 状態の保存に失敗: " + e.getMessage());
+        }
+    }
 
     public static void register() {
         ClientTickEvents.END_CLIENT_TICK.register(ItemHighlightManager::onTick);
     }
 
     private static void onTick(MinecraftClient client) {
+        if (!enableHighlight) return;
         if (client.world == null) return;
 
         for (Entity entity : client.world.getEntities()) {

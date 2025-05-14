@@ -4,6 +4,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.List;
+import java.util.Objects;
 
 public enum ItemRarity {
 
@@ -35,6 +36,17 @@ public enum ItemRarity {
             }
         }
         return COMMON;
+    }
+
+    public static ItemRarity fromString(String text) {
+
+        for (ItemRarity r : values()) {
+            if (text.contains(r.keyword)) {
+                return r;
+            }
+        }
+        return COMMON;
+
     }
 
 }
