@@ -33,6 +33,8 @@ public class ItemHighlightManager {
     private static final File HighLight_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "itemhighlighter.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
+    private ItemHighlightManager() {}
+
     public static void load() {
         if (!HighLight_FILE.exists()) return;
         try (Reader reader = new FileReader(HighLight_FILE)) {
