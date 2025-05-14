@@ -1,6 +1,5 @@
 package yuku.dsupport.mixin.client;
 
-import yuku.dsupport.itemLock.ClientLockRegistry;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
@@ -9,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import yuku.dsupport.itemLock.ClientLockRegistry;
 
 @Mixin(MinecraftClient.class)
 public class MinecraftClientMixin {
@@ -16,9 +16,9 @@ public class MinecraftClientMixin {
     @Inject(
             method = "handleInputEvents",
             at = @At(
-            value = "INVOKE",
-            target = "Lnet/minecraft/client/network/ClientPlayerEntity;dropSelectedItem(Z)Z"
-    ),
+                    value = "INVOKE",
+                    target = "Lnet/minecraft/client/network/ClientPlayerEntity;dropSelectedItem(Z)Z"
+            ),
             cancellable = true)
     private void onHandleInputEvents(CallbackInfo ci) {
         MinecraftClient client = MinecraftClient.getInstance();

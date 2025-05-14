@@ -7,13 +7,13 @@ import java.util.List;
 
 public enum ItemRarity {
 
-    COMMON("ノーマル", 0, Formatting.GRAY),
-    RARE("レア", 1, Formatting.GREEN),
-    SUPERRARE("スーパーレア", 2, Formatting.AQUA),
-    ULTRARARE("ウルトラレア", 3, Formatting.RED),
-    LEGENDARY("レジェンド", 4, Formatting.YELLOW),
+    SPECIAL("スペシャル", 6, Formatting.DARK_PURPLE),
     MIRACLE("ミラクル", 5, Formatting.GOLD),
-    SPECIAL("スペシャル", 6, Formatting.DARK_PURPLE);
+    LEGENDARY("レジェンド", 4, Formatting.YELLOW),
+    ULTRARARE("ウルトラレア", 3, Formatting.RED),
+    SUPERRARE("スーパーレア", 2, Formatting.AQUA),
+    RARE("レア", 1, Formatting.GREEN),
+    COMMON("ノーマル", 0, Formatting.GRAY);
 
     public final String keyword;
     public final int level;

@@ -1,19 +1,20 @@
 {
-	"required": true,
-	"package": "yuku.dsupport.mixin.client",
-	"compatibilityLevel": "JAVA_17",
-	"client": [
-		"ClientPlayNetworkHandlerMixin",
-		"HandledScreenAccessor",
-		"HandledScreenMixin",
-		"MinecraftClientMixin"
-	],
-	"injectors": {
-		"defaultRequire": 1
-	},
-	"mixins": [
-		"EntityAccessor",
-		"ItemStackMixin",
-		"ScreenHandlerMixin"
+  "required": true,
+  "package": "yuku.dsupport.mixin.client",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "ClientPlayNetworkHandlerMixin",
+    "HandledScreenAccessor",
+    "HandledScreenMixin",
+    "MinecraftClientMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "mixins": [
+    "ClientConnectionMixin",
+    "EntityAccessor",
+    "ItemStackMixin",
+    "ScreenHandlerMixin"
 	]
 }

@@ -49,7 +49,7 @@ public class ClientLockRegistry {
     }
 
     public static int getLockState(ItemStack stack) {
-        return lockMap.getOrDefault(getItemKey(stack), 0);
+        return stack != null ? lockMap.getOrDefault(getItemKey(stack), 0) : 0;
     }
 
     public static void cycleLockState(ItemStack stack) {

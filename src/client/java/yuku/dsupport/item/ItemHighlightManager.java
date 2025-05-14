@@ -67,7 +67,7 @@ public class ItemHighlightManager {
         Team team = scoreboard.getTeam(teamName);
         if (team == null) {
             team = scoreboard.addTeam(teamName);
-            team.setColor(Formatting.GRAY);
+            team.setColor(color);
             team.setShowFriendlyInvisibles(false);
             team.setFriendlyFireAllowed(true);
         }

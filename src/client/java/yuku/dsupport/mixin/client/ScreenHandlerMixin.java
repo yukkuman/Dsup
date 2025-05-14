@@ -24,16 +24,29 @@ public class ScreenHandlerMixin {
                 ItemStack stack = slot.getStack();
                 if (ClientLockRegistry.getLockState(stack) == 2) {
                     ci.cancel();
+                    handler.setStackInSlot(slotIndex, 0, stack.copy());
                 }
             }
-            return;
         }
 
         // プレイヤーのカーソルアイテムもチェック（外枠クリックやドラッグドロップ）
         ItemStack carried = player.currentScreenHandler.getCursorStack();
         if (!carried.isEmpty() && ClientLockRegistry.getLockState(carried) == 1) {
             ci.cancel();
+            handler.setCursorStack(carried.copy());
         }
+
+        ItemStack cursor = player.currentScreenHandler.getCursorStack();
+        if (!cursor.isEmpty()) {
+            int lockState = ClientLockRegistry.getLockState(cursor);
+            if (lockState == 2 || (lockState == 1 && actionType == SlotActionType.THROW)) {
+                // カーソルのアイテム復元
+                player.currentScreenHandler.setCursorStack(cursor.copy());
+
+            }
+        }
+
+
     }
 
 }
